@@ -33,7 +33,7 @@ public class ListTest {
         list.add(elem);
         assertTrue((sizeBefore + 1) == list.size());
         assertEquals(list.get(list.size() - 1), Integer.valueOf(elem));
-        int index = 2;
+        int index = 1;
         elem = 6;
         list.add(index, elem);
         assertEquals(list.get(index), Integer.valueOf(elem));
