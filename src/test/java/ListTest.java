@@ -19,6 +19,9 @@ public class ListTest {
     public void testCreation() {
         List<Object> list2 = new ArrayList<>();
         assertTrue(list.size() == 0);
+        assertTrue(list.isEmpty());
+        list.add(0);
+        assertTrue(list.size()==1);
     }
 
     @Test
@@ -34,5 +37,16 @@ public class ListTest {
         assertEquals(list.get(index), Integer.valueOf(elem));
     }
 
-
+    @Test
+    public void testGetIndexSet() {
+        Integer elem = 9;
+        list.add(elem);
+        int indexLast = list.size()-1;
+        assertEquals(list.get(indexLast),elem);
+        assertEquals(list.indexOf(elem), indexLast);
+        assertTrue(list.contains(elem));
+        Integer newElem = 10;
+        list.set(indexLast,newElem);
+        assertEquals(list.get(indexLast),newElem);
+    }
 }
