@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -88,8 +89,15 @@ public class ListTest {
         list.add(3);
         list.add(2);
         list.sort(Comparator.naturalOrder());
-        List<Integer> listSorted = new ArrayList<>();
-        addElem(listSorted);
-        assertEquals(list, listSorted);
+        Iterator<Integer> iterator = list.iterator();
+        if (iterator.hasNext()) {
+            int current;
+            int previous = iterator.next();
+            while (iterator.hasNext()) {
+                current = iterator.next();
+                assertTrue(current >= previous);
+                previous = current;
+            }
+        }
     }
 }
