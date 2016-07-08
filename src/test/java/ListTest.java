@@ -52,10 +52,8 @@ public class ListTest {
     }
 
     @Test
-    public void testRemoveClear() {
-        list.add(5);
+    public void testRemoveMethod() {
         list.clear();
-        assertTrue(list.isEmpty());
         addElem(list);
         int index = 1;
         int size = list.size();
@@ -63,6 +61,13 @@ public class ListTest {
         assertTrue(list.size() == (size - 1) && !list.contains(2));
         list.remove(Integer.valueOf(1));
         assertTrue(list.size() == (size - 2) && !list.contains(1));
+    }
+
+    @Test
+    public void testClearMethod() {
+        list.add(5);
+        list.clear();
+        assertTrue(list.isEmpty());
     }
 
     @Test
