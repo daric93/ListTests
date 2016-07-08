@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ListTest {
     public List<Integer> list = new ArrayList<>();
@@ -53,10 +51,8 @@ public class ListTest {
     }
 
     @Test
-    public void testRemoveClear() {
-        list.add(5);
+    public void testRemoveMethod() {
         list.clear();
-        assertTrue(list.isEmpty());
         addElem(list);
         int index = 1;
         int size = list.size();
@@ -67,10 +63,17 @@ public class ListTest {
     }
 
     @Test
+    public void testClearMethod() {
+        list.add(5);
+        list.clear();
+        assertTrue(list.isEmpty());
+    }
+
+    @Test
     public void testEquals() {
         list.clear();
         addElem(list);
-        List<Integer> list2= new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
         list2.add(1);
         list2.add(2);
         assertFalse(list.equals(list2));
@@ -79,7 +82,7 @@ public class ListTest {
     }
 
     @Test
-    public void testSort(){
+    public void testSort() {
         list.clear();
         list.add(1);
         list.add(3);
@@ -87,6 +90,6 @@ public class ListTest {
         list.sort(Comparator.naturalOrder());
         List<Integer> listSorted = new ArrayList<>();
         addElem(listSorted);
-        assertEquals(list,listSorted);
+        assertEquals(list, listSorted);
     }
 }
