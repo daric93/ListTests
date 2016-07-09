@@ -1,24 +1,24 @@
+package daric.collections;
+
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ListTest {
-    public List<Integer> list = new ArrayList<>();
+public abstract class ListTest {
+    public abstract List<Integer> getList();
 
-    public void addElem(List<Integer> list) {
-        list.add(1);
-        list.add(2);
-        list.add(3);
+    public void addElem(List<Integer> list, Integer... numbers) {
+        Collections.addAll(list, numbers);
     }
 
     @Test
     public void testCreation() {
-        List<Object> list2 = new ArrayList<>();
+        List<Integer> list = getList();
         assertTrue(list.size() == 0);
         assertTrue(list.isEmpty());
         list.add(0);
@@ -27,6 +27,8 @@ public class ListTest {
 
     @Test
     public void testAdd() {
+        List<Integer> list = getList();
+        addElem(list, 1, 3, 7);
         int sizeBefore = list.size();
         int elem = 4;
         list.add(elem);
@@ -40,6 +42,8 @@ public class ListTest {
 
     @Test
     public void testGetIndexSet() {
+        List<Integer> list = getList();
+        addElem(list, 1, 3, 7);
         Integer elem = 9;
         list.add(elem);
         int indexLast = list.size() - 1;
@@ -53,41 +57,39 @@ public class ListTest {
 
     @Test
     public void testRemoveMethod() {
-        list.clear();
-        addElem(list);
+        List<Integer> list = getList();
+        addElem(list, 4, 5, 6);
         int index = 1;
         int size = list.size();
         list.remove(index);
-        assertTrue(list.size() == (size - 1) && !list.contains(2));
-        list.remove(Integer.valueOf(1));
-        assertTrue(list.size() == (size - 2) && !list.contains(1));
+        assertTrue(list.size() == (size - 1) && !list.contains(5));
+        list.remove(Integer.valueOf(6));
+        assertTrue(list.size() == (size - 2) && !list.contains(6));
     }
 
     @Test
     public void testClearMethod() {
-        list.add(5);
+        List<Integer> list = getList();
+        addElem(list, 4, 5, 6);
         list.clear();
         assertTrue(list.isEmpty());
     }
 
     @Test
     public void testEquals() {
-        list.clear();
-        addElem(list);
-        List<Integer> list2 = new ArrayList<>();
-        list2.add(1);
-        list2.add(2);
+        List<Integer> list = getList();
+        addElem(list, 4, 5, 6);
+        List<Integer> list2 = getList();
+        addElem(list2, 4, 5);
         assertFalse(list.equals(list2));
-        list2.add(3);
+        list2.add(6);
         assertTrue(list.equals(list2));
     }
 
     @Test
     public void testSort() {
-        list.clear();
-        list.add(1);
-        list.add(3);
-        list.add(2);
+        List<Integer> list = getList();
+        addElem(list, 56, 78, 3, 4, 34, 12, 90, 76);
         list.sort(Comparator.naturalOrder());
         Iterator<Integer> iterator = list.iterator();
         if (iterator.hasNext()) {
