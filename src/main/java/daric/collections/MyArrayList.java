@@ -1,87 +1,18 @@
 package daric.collections;
 
+import java.util.AbstractList;
 import java.util.Arrays;
-import java.util.Comparator;
 
-public class MyArrayList implements MyList {
+public class MyArrayList<E> extends AbstractList<E> {
     private int size = 0;
-    private Integer[] arr = new Integer[20];
+    private Object[] arr = new Object[2];
 
-
+    @SuppressWarnings("unchecked")
     @Override
-    public void add(Integer elem) {
-        if (size == arr.length)
-            arr = Arrays.copyOf(this.arr, size += 50);
-        arr[size++] = elem;
-    }
-
-    @Override
-    public void add(int index, Integer elem) {
-        if (index < 0 || index > size)
-            throw new IndexOutOfBoundsException();
-        if (size == arr.length)
-            arr = Arrays.copyOf(this.arr, size += 50);
-        System.arraycopy(arr, index, arr, index + 1, size - index);
-        arr[index] = elem;
-        size++;
-    }
-
-    @Override
-    public void clear() {
-        size = 0;
-    }
-
-    @Override
-    public int get(int index) {
+    public E get(int index) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
-        return arr[index];
-    }
-
-    @Override
-    public int indexOf(Integer elem) {
-        for (int i = 0; i < size; i++) {
-            if (arr[i].equals(elem))
-                return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public int remove(int index) {
-        int removed = arr[index];
-        System.arraycopy(arr, index + 1, arr, index, size - (index + 1));
-        size--;
-        return removed;
-    }
-
-    @Override
-    public boolean remove(Integer elem) {
-        int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (arr[i].equals(elem)) {
-                index = i;
-                break;
-            }
-        }
-        if (index >= 0) {
-            System.arraycopy(arr, index + 1, arr, index, size - (index + 1));
-            size--;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int set(int index, Integer elem) {
-        int prev = arr[index];
-        arr[index] = elem;
-        return prev;
+        return (E) arr[index];
     }
 
     @Override
@@ -90,7 +21,32 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void sort(Comparator<? super Object> c) {
-        Arrays.sort(arr, c);
+    public void add(int index, E element) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
+        if (size == arr.length)
+            arr = Arrays.copyOf(this.arr, size * 2);
+        System.arraycopy(arr, index, arr, index + 1, size - index);
+        arr[index] = element;
+        size++;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public E set(int index, E element) {
+        E prev = (E) arr[index];
+        arr[index] = element;
+        return prev;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public E remove(int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
+        E removed = (E) arr[index];
+        System.arraycopy(arr, index + 1, arr, index, size - (index + 1));
+        size--;
+        return removed;
     }
 }
