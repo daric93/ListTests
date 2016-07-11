@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class HashSetTest extends SetTest {
     @Override
     Set<Integer> getSet() {
-        return new HashSet<>();
+        return new MyHashSet<>();
     }
 
     @Test
