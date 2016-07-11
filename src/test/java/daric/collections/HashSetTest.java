@@ -14,6 +14,13 @@ public class HashSetTest extends SetTest {
     }
 
     @Test
+    public void testAddNull() {
+        Set<Integer> set = getSet();
+        assertTrue(set.add(null));
+        assertTrue(set.contains(null));
+    }
+
+    @Test
     public void testRemoveNull() {
         Set<Integer> set = getSet();
         set.add(4);
