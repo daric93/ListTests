@@ -2,7 +2,6 @@ package daric.collections;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 public class HashSetTest extends SetTest {
     @Override
     Set<Integer> getSet() {
-        return new HashSet<>();
+        return new MyHashSet<>();
     }
 
     @Test

@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LinkedHashSet extends SetTest {
     @Override
@@ -26,5 +25,18 @@ public class LinkedHashSet extends SetTest {
         set.add(null);
         assertTrue(set.remove(null));
         assertFalse(set.contains(null));
+    }
+
+    @Test
+    public void testOrder() {
+        Set<Integer> set = getSet();
+        for (int i = 0; i < 10; i++) {
+            set.add(i);
+        }
+        int i = 0;
+        for (Integer aSet : set) {
+            assertEquals(Integer.valueOf(i), aSet);
+            i++;
+        }
     }
 }
